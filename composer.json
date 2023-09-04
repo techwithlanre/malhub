@@ -1,0 +1,17 @@
+{
+    "name": "muhja/malhub",
+    "autoload": {
+        "psr-4": {
+            "Muhja\\Malhub\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jamiu Olanrewaju",
+            "email": "96052702+techwithlanre@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "wanfeiyy/dd": "^1.0"
+    }
+}
