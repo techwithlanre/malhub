@@ -23,7 +23,7 @@ if (isset($_POST['email'])) {
     if (count($error) == 0) {
 
     } else {
-        //process showing errors here
+        //process showing errors
     }
 
 
