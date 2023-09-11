@@ -7,12 +7,12 @@ if (isset($_POST['email'])) {
     $error = [];
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-    if (strlen($email) < 5) {
+    if (strlen($email) < 5) { // length of the email
         $error[] = 'Your email can not be less than 5 characters.';
     }
 
-    if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //sara@rachael.com
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error[] = 'Enter an actual email';
     }
 
@@ -21,7 +21,7 @@ if (isset($_POST['email'])) {
     }
 
     if (count($error) == 0) {
-        $query = $db->prepare("SELECT id, name, phone, email, gender, created_at FROM `user` WHERE email = ? AND password = ? ");
+        $query = $db->prepare("SELECT id, name, phone, email, gender, created_at FROM `users` WHERE email = ? AND password = ? ");
         $result = $query->execute([$email, $password]);
         $userCount = $query->rowCount();
         if ($userCount > 0) {
@@ -31,15 +31,12 @@ if (isset($_POST['email'])) {
             exit;
         }
     } else {
-        //process showing errors
+        $_SESSION['errors'] = $error;
+        header("Location: login.php");
+        exit;
     }
-
-
-    dd($error);
-
-
-
 }
+
 
 
 function validateActualEmail($email) {
@@ -66,18 +63,28 @@ function validateActualEmail($email) {
     </head>
     <body>
         <div style="max-width: 500px; margin: 0 auto; margin-top: 100px;">
+
+            <?php if (isset($_SESSION['errors'])) { ?>
+                <div class='w3-panel w3-red' style="border-radius: 10px;">
+                    <h3>Danger!</h3>
+                    <?php foreach ($_SESSION['errors'] as $error) {  ?>
+                        <p><?php echo $error ?></p>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+
             <div style="margin-bottom: 20px; background: #1a75ff; color: white; padding: 5px; border-radius: 10px;">
                 <h3>Login</h3>
             </div>
             <div style="border: 1px solid gray; padding: 10px; border-radius: 10px;">
-                <form class="w3-container" method="post">
+                <form action="<?= $_SERVER['PHP_SELF'] ?>" class="w3-container" method="post">
                     <label>Email</label>
                     <input class="w3-input" type="text" name="email">
 
                     <label>Password</label>
                     <input class="w3-input" type="password" name="password">
 
-                    <input class="w3-btn w3-blue" type="submit" style="margin-top: 20px;">
+                    <input class="w3-btn w3-blue" type="submit" style="margin-top: 20px; border-radius: 7px;">
                 </form>
             </div>
         </div>

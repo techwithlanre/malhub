@@ -1,14 +1,8 @@
 <?php
-session_start();
-require 'vendor/autoload.php';
-require 'inc/db.php';
-
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php?action=access&result=no_login");
-}
+require 'inc/init.php';
 
 $page_name = $_GET['view'];
-if (strlen($page_name) == 0) die('no page found');
+if (strlen($page_name) == 0) dd('no page found');
 
 ?>
 <!doctype html>
@@ -19,14 +13,12 @@ if (strlen($page_name) == 0) die('no page found');
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="inc/w3.css">
     <link rel="stylesheet" href="inc/styles.css">
-    <title>Document</title>
+    <title><?= ucfirst($page_name) ?></title>
 </head>
 <body class="">
 <?php require 'inc/header.php'; ?>
 <div class="w3-container">
-    <?php
-    require $page_name . '.php';
-    ?>
+    <?php require $page_name . '.php'; ?>
 </div>
 
 

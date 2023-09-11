@@ -4,4 +4,5 @@
     <a href="index.php?view=students" class="w3-bar-item w3-button">Students</a>
     <a href="index.php?view=courses" class="w3-bar-item w3-button">Courses</a>
     <a href="index.php?view=workspaces" class="w3-bar-item w3-button">Workspaces</a>
+    <a href="logout.php" class="w3-bar-item w3-button">Logout</a>
 </div>
