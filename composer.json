@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "wanfeiyy/dd": "^1.0"
+        "wanfeiyy/dd": "^1.0",
+        "ext-pdo": "*"
     }
 }

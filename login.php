@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'vendor/autoload.php';
 require 'inc/db.php';
 
@@ -19,9 +20,16 @@ if (isset($_POST['email'])) {
         $error[] = 'Your password should not be less than 8 characters';
     }
 
-
     if (count($error) == 0) {
-
+        $query = $db->prepare("SELECT id, name, phone, email, gender, created_at FROM `user` WHERE email = ? AND password = ? ");
+        $result = $query->execute([$email, $password]);
+        $userCount = $query->rowCount();
+        if ($userCount > 0) {
+            $user = $query->fetch();
+            $_SESSION['user'] = $user;
+            header("Location: index.php?view=dashboard");
+            exit;
+        }
     } else {
         //process showing errors
     }

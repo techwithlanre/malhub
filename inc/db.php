@@ -1,11 +1,12 @@
 <?php
-$serverName = "localhost";
+$host = "localhost";
 $username = "malhib_admin";
 $password = "ClickJug1!.";
-$dbName = "malhub";
+$db_name = "malhub";
 
-$conn = new mysqli($serverName,$username,$password,$dbName);
-
-if (!$conn) {
-    die($conn->error);
+try {
+    $dsn = "mysql:host=$host;dbname=$db_name";
+    $db = new PDO($dsn, $username, $password);
+} catch (PDOException $exception) {
+    echo $exception->getMessage();
 }
