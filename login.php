@@ -21,8 +21,8 @@ if (isset($_POST['email'])) {
     }
 
     if (count($error) == 0) {
-        $query = $db->prepare("SELECT id, name, phone, email, gender, created_at FROM `users` WHERE email = ? AND password = ? ");
-        $result = $query->execute([$email, $password]);
+        $query = $db->prepare("SELECT id, name, phone, email, gender, created_at FROM `users` WHERE email = ? AND password = ? AND status = ?");
+        $result = $query->execute([$email, $password, 1]);
         $userCount = $query->rowCount();
         if ($userCount > 0) {
             $user = $query->fetch();
