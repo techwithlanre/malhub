@@ -1,5 +1,10 @@
 <?php
 
+/*
+ *
+ * Author: Olanrewaju Jamiu
+ *
+ * */
 $students_query = $db->prepare('SELECT * FROM students');
 $result = $students_query->execute();
 $studentCount = $students_query->rowCount();
